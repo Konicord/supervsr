@@ -6,8 +6,8 @@ defmodule Supervsr do
     %{
       id: Supervsr,
       start: {__MODULE__, :start_link, [opts]},
-      shutdown: 5_000,
-      restart: :permanent,
+    #  shutdown: 5_000,
+    #  restart: :permanent, DEPRECATED, moved directly into the child
       type: :worker
     }
   end

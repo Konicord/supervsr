@@ -8,15 +8,15 @@ defmodule Supervsr.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {Supervsr, ["Koni"]},
+    #  {Supervsr, ["Koni"]}, => would be Supervsr.queue
 
-    # {Task.Supervisor, name: Supervsr.TaskSupervisor, restart: :transient}
-    # iex> {:ok, pid} = Supervisor.start_link(children, strategy: one_for_one)
+    {Task.Supervisor, name: Supervsr.TaskSupervisor}
+    # iex> {:ok, pid} = Task.Supervisor.start_child(Supervisr.TaskSupervisor, fn -> background_work end)
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Supervsr.Supervisor]
+    opts = [strategy: :one_for_one, name: Supervsr.Supervisor, restart: :permanent, shutdown: 5_000]
     Supervisor.start_link(children, opts)
   end
 end
