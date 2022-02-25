@@ -1,6 +1,5 @@
 # Supervsr
-
-**TODO: Add description**
+Simple examples how to use Supervisors in Elixir (mix)
 
 ## Installation
 

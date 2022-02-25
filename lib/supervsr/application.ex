@@ -8,8 +8,10 @@ defmodule Supervsr.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Supervsr.Worker.start_link(arg)
-      # {Supervsr.Worker, arg}
+      {Supervsr, ["Koni"]},
+
+    # {Task.Supervisor, name: Supervsr.TaskSupervisor, restart: :transient}
+    # iex> {:ok, pid} = Supervisor.start_link(children, strategy: one_for_one)
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -18,3 +20,10 @@ defmodule Supervsr.Application do
     Supervisor.start_link(children, opts)
   end
 end
+
+
+# There are three different strategies:
+
+# :one_for_one - Only restart the failed child process
+# :one_for_all - Restart all child processes in the event of a failure.
+# :rest_for_one - Restart the failed process and any process start after it.
